@@ -14,6 +14,16 @@
 
 PhoneBook Book;
 
+/**
+ * @brief Vérifie si une chaîne ne contient que des chiffres, '+' ou des espaces.
+ *
+ * Cette fonction analyse la chaîne donnée et retourne vrai si elle ne contient 
+ * que des chiffres (0-9), le caractère '+' ou des espaces. Sinon, elle retourne faux.
+ * 
+ * @param str La chaîne de caractères à vérifier.
+ * @return true Si la chaîne ne contient que des chiffres, '+' ou des espaces.
+ * @return false Sinon.
+ */
 bool isNumbers(const std::string& str)
 {
     return str.find_first_not_of("0123456789+ ") == std::string::npos;
