@@ -86,7 +86,6 @@ int main()
         }
         else if (buff == "SEARCH")
         {
-            int pos = -1;
             std::string numt = "";
             Book.GetAll();
 
