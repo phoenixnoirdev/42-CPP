@@ -6,7 +6,7 @@
 /*   By: phkevin <phkevin@42luxembourg.lu>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:23:43 by phkevin           #+#    #+#             */
-/*   Updated: 2025/02/24 15:13:50 by phkevin          ###   Luxembour.lu      */
+/*   Updated: 2025/03/03 14:36:00 by phkevin          ###   Luxembour.lu      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,30 @@ PhoneBook Book;
 bool isNumbers(const std::string& str)
 {
     return str.find_first_not_of("0123456789+ ") == std::string::npos;
+}
+
+/**
+ * @brief Vérifie si une chaîne contient un caractère spécial.
+ * 
+ * Parcourt la chaîne et retourne true dès qu'un caractère
+ * non alphanumérique et non espace est détecté.
+ * 
+ * @param c La chaîne à analyser.
+ * @return true si un caractère spécial est trouvé, sinon false.
+ */
+bool isSpecialChar(std::string c) 
+{
+    bool res = false;
+
+    for (std::string::size_type i = 0; i < c.length(); i++)
+	{
+        if (isalnum(c[i]) == 0 && isspace(c[i]) == 0)
+        {
+            res = true;
+            return (res);
+        } 
+    }
+    return (res);
 }
 
 /**
@@ -56,33 +80,81 @@ int main()
         if (buff == "ADD")
         {
             std::string fname, lname, nname, num, dark;
-
-            std::cout << "Enter first name\n";;
+            
             std::cin.ignore();
-            std::getline(std::cin, fname);
+            do
+            {
+                std::cout << "Enter first name\n";
+                std::getline(std::cin, fname);
+                if (fname.empty())
+                    std::cout << "This field is empty\n";
+                if (isSpecialChar(fname))
+                {
+                    std::cout << "This field contains special characters\n";
+                    fname = "";
+                }
+            } while (fname.empty());
+            
+            do
+            {
+                std::cout << "Enter last name\n";
+                std::getline(std::cin, lname);
+                if (lname.empty())
+                    std::cout << "This field is empty\n";
+                if (isSpecialChar(lname))
+                {
+                    std::cout << "This field contains special characters\n";
+                    lname = "";
+                }
+            } while (lname.empty());
 
-            std::cout << "Enter last name\n";
-            std::getline(std::cin, lname);
+            do
+            {
+                std::cout << "Enter nickname\n";
+                std::getline(std::cin, nname);
+                if (nname.empty())
+                    std::cout << "This field is empty\n";
+                if (isSpecialChar(nname))
+                {
+                    std::cout << "This field contains special characters\n";
+                    nname = "";
+                }
+            } while (nname.empty());
 
-            std::cout << "Enter nickname\n";
-            std::getline(std::cin, nname);
+            do
+            {
+                std::cout << "Enter phone number\n";
+                std::getline(std::cin, num);
+                if (num.empty())
+                    std::cout << "This field is empty\n";
+                if (isNumbers(num) == false)
+                {
+                    std::cout << "Error: Please enter a valid phone number.\n";
+                    num = "";
+                }
+                if (isSpecialChar(num))
+                {
+                    std::cout << "This field contains special characters\n";
+                    num = "";
+                }  
+            } while (num.empty());
 
-            std::cout << "Enter phone number\n";
-            std::getline(std::cin, num);
-
-            if (isNumbers(num) == true)
+            do
             {
                 std::cout << "Enter darkest secret\n";
                 std::getline(std::cin, dark);
+                if (dark.empty())
+                    std::cout << "This field is empty\n";
+                if (isSpecialChar(dark))
+                {
+                    std::cout << "This field contains special characters\n";
+                    dark = ""; 
+                }
+            } while (dark.empty());
 
-                Book.AddPhoneBook(fname, lname, nname, num, dark);
+            Book.AddPhoneBook(fname, lname, nname, num, dark);
 
-                std::cout << "New enter = " << fname << "| " << lname << "| " << nname << "| " << num << "| " << dark << "|\n";
-            }
-            else
-            {
-                std::cout << "Error: Please enter a valid phone number." << "\n";
-            }
+            std::cout << "New enter = " << fname << "| " << lname << "| " << nname << "| " << num << "| " << dark << "|\n";
         }
         else if (buff == "SEARCH")
         {
