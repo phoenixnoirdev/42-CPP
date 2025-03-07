@@ -27,7 +27,7 @@ NAME		=	account
 OBJS_DIR	=	./
 OBJS		=	$(addprefix $(OBJS_DIR), $(FILES:.cpp=.o))
 
-FILES		=	account.cpp\
+FILES		=	Account.cpp\
 				tests.cpp\
 
 ################################################################################
