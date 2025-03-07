@@ -6,7 +6,7 @@
 /*   By: phkevin <phkevin@42luxembourg.lu>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:31:16 by phkevin           #+#    #+#             */
-/*   Updated: 2025/01/24 15:07:49 by phkevin          ###   Luxembour.lu      */
+/*   Updated: 2025/03/07 15:07:49 by phkevin          ###   Luxembourg.lu     */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,18 +133,18 @@ void	Account::displayStatus(void) const
 
 void	Account::_displayTimestamp(void)
 {
-	std::time_t t = std::time(NULL);
-	std::tm* tm_info = localtime(&t);
+	std::time_t t = std::time(nullptr);
+	std::tm tm_info;
 
-	if (tm_info != NULL) {
+	if (localtime_s(&tm_info, &t) == 0) {
 		std::cout << "["
-			<< 1900 + tm_info->tm_year
-			<< 1 + tm_info->tm_mon
-			<< tm_info->tm_mday
+			<< 1900 + tm_info.tm_year
+			<< (tm_info.tm_mon < 10 ? "0" : "") << 1 + tm_info.tm_mon
+			<< (tm_info.tm_mday < 10 ? "0" : "") <<  tm_info.tm_mday
 			<< "_"
-			<< tm_info->tm_hour
-			<< tm_info->tm_min
-			<< tm_info->tm_sec
+			<< (tm_info.tm_hour < 10 ? "0" : "") << tm_info.tm_hour
+			<< (tm_info.tm_min < 10 ? "0" : "") << tm_info.tm_min
+			<< (tm_info.tm_sec < 10 ? "0" : "") << tm_info.tm_sec
 			<< "] ";	
 	}
 	else {
