@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phkevin <phkevin@42luxembourg.lu>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 10:28:58 by phkevin           #+#    #+#             */
-/*   Updated: 2025/03/10 12:48:55 by phkevin          ###   Luxembourg.lu     */
+/*   Created: 2025/03/10 13:07:29 by phkevin           #+#    #+#             */
+/*   Updated: 2025/03/11 09:02:10 by phkevin          ###   Luxembourg.lu     */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.hpp"
+#ifndef POINT_HPP
+#define POINT_HPP
 
-int main()
+#include <math.h>
+#include "Fixed.hpp"
+
+class Point
 {
-    Harl harl;
-    
-    harl.complain("0");
-    harl.complain("1");
-    harl.complain("2");
-    harl.complain("3");
+private:
+	Fixed FixedX, FixedY;
 
-    return 0;
-}
+public:
+	Point();
+	Point(const Fixed x, const Fixed y);
+	Point(const Point &pt);
+	Point& operator=(const Point &other);
+	float getx() const;
+	float gety() const;
+	~Point();
+};
+
+bool bsp(Point const a, Point const b, Point const c, Point const point);
+
+#endif // POINT_HPP

@@ -6,7 +6,7 @@
 /*   By: phkevin <phkevin@42luxembourg.lu>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 10:36:24 by phkevin           #+#    #+#             */
-/*   Updated: 2025/03/03 10:36:34 by phkevin          ###   Luxembour.lu      */
+/*   Updated: 2025/03/10 12:49:23 by phkevin          ###   Luxembourg.lu     */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ int equals(std::string s1, std::string s2)
         ii++;
     if (i != ii)
         return 1;
-    for (int j = 0; j < i; j++) {
+    for (int j = 0; j < i; j++)
+    {
         if (s1[j] != s2[j])
             return 1;
     }
+
     return 0;
 }
 
@@ -65,5 +67,6 @@ int main(int argc, char** argv)
         harl.complain("3");
     else
         std::cout << "Probably complaining about insignificant problems" << std::endl;
+    
     return 0;
 }

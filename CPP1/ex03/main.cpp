@@ -6,7 +6,7 @@
 /*   By: phkevin <phkevin@42luxembourg.lu>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 10:16:15 by phkevin           #+#    #+#             */
-/*   Updated: 2025/03/03 10:19:56 by phkevin          ###   Luxembour.lu      */
+/*   Updated: 2025/03/10 12:48:24 by phkevin          ###   Luxembourg.lu     */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int main()
 		club.setType("some other type of club");
 		jim.attack();
 	}
+	
 	return 0;
 }

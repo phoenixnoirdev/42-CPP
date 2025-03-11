@@ -19,4 +19,6 @@ int main()
     z->Announce();
     delete(z);
     randomChump("BOO");
+    
+    return 0;
 }

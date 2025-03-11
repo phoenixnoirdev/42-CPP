@@ -19,7 +19,7 @@
  */
 void	Zombie::Announce(void) const
 {
-	std::cout << name + ": BraiiiiiiinnnzzzZ...\n";
+	std::cout << name + ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
 /**

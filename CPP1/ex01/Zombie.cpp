@@ -6,7 +6,7 @@
 /*   By: phkevin <phkevin@42luxembourg.lu>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 10:00:12 by phkevin           #+#    #+#             */
-/*   Updated: 2025/03/03 10:00:24 by phkevin          ###   Luxembour.lu      */
+/*   Updated: 2025/03/10 12:47:52 by phkevin          ###   Luxembourg.lu     */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	Zombie::SetName(std::string nam)
  */
 void	Zombie::Announce(void) const
 {
-	std::cout << name + ": BraiiiiiiinnnzzzZ...\n";
+	std::cout << name + ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
 /**

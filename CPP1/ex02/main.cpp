@@ -6,7 +6,7 @@
 /*   By: phkevin <phkevin@42luxembourg.lu>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 10:08:12 by phkevin           #+#    #+#             */
-/*   Updated: 2025/03/03 10:11:30 by phkevin          ###   Luxembour.lu      */
+/*   Updated: 2025/03/10 12:48:04 by phkevin          ###   Luxembourg.lu     */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int main()
     std::cout << "\nstr value: " << str << std::endl;
     std::cout << "str value via PTR: " << *strPTR << std::endl;
     std::cout << "str value via REF: " << strREF << std::endl;
+    
     return 0;
 }
