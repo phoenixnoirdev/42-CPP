@@ -1,0 +1,263 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Span.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phkevin <phkevin@42luxembourg.lu>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/13 12:52:28 by phkevin           #+#    #+#             */
+/*   Updated: 2025/07/04 12:52:28 by phkevin          ###   Luxembourg.lu     */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "inc/Span.hpp"
+
+//==============================
+// Consturcteur
+//==============================
+
+/**
+ * @brief Constructeur par defaut de la classe Span.
+ *
+ * Ce constructeur initialise un objet Span avec une taille maximale
+ * (_sizelist) de 0. Si DEBUG est vrai, un message est affiche pour
+ * indiquer que le constructeur par defaut a ete appele.
+ */
+Span::Span(): _sizelist(0)
+{
+	if (DEBUG == true)
+		std::cout << GREEN << LOGO << RESET << "Default constructor called" << RESET << std::endl;
+}
+
+/**
+ * @brief Constructeur par defaut de la classe Span.
+ *
+ * Ce constructeur initialise un objet Span avec une taille maximale
+ * (_sizelist) determinee par le parametre 'val'. Si DEBUG est vrai,
+ * un message est affiche pour indiquer que le constructeur a ete
+ * appele.
+ *
+ * @param val Taille maximale du Span.
+ */
+Span::Span(unsigned int val) : _sizelist(val)
+{
+	if (DEBUG == true)
+		std::cout << GREEN << LOGO << RESET << "Default constructor called" << RESET << std::endl;
+}
+
+/**
+ * @brief Constructeur de copie de la classe Span.
+ *
+ * Ce constructeur initialise un nouvel objet Span en copiant les valeurs
+ * de l'objet source. Si DEBUG est vrai, un message est affiche pour indiquer
+ * que le constructeur de copie a ete appele.
+ *
+ * @param obj L'objet Span a copier.
+ */
+Span::Span(const Span& obj)
+{
+	*this = obj;
+
+	if (DEBUG == true)
+		std::cout << GREEN << LOGO << RESET << "Copy constructor called" << RESET << std::endl;
+}
+
+/**
+ * @brief Operateur d'assignation de la classe Span.
+ *
+ * Cet operateur permet d'assigner les valeurs d'un objet Span a un autre.
+ * Si l'objet n'est pas le meme que l'objet source, la taille de la liste
+ * est mise a jour. Si DEBUG est vrai, un message est affiche pour indiquer
+ * que l'operateur a ete appele.
+ *
+ * @param obj L'objet Span a copier.
+ * @return Span& L'objet courant.
+ */
+Span& Span::operator=(const Span& obj)
+{
+	if (this != &obj)
+		this->_sizelist = obj._sizelist;
+
+	if (DEBUG == true)
+		std::cout << GREEN << LOGO << RESET << "Operator constructor called" << RESET << std::endl;
+
+	return *this;
+}
+
+/**
+ * @brief Destructeur de la classe Span.
+ *
+ * Ce destructeur est appele lorsque l'objet Span est detruit. Si DEBUG est
+ * vrai, un message de confirmation est affiche pour indiquer que le destructeur
+ * a ete appele.
+ */
+Span::~Span()
+{
+	if (DEBUG == true)
+		std::cout << GREEN << LOGO << RESET << "Destructor called" << RESET << std::endl;
+}
+
+
+//==============================
+// Fonction
+//==============================
+
+/**
+ * @brief Ajoute un nombre entier dans le conteneur _store.
+ *
+ * Cette methode ajoute un nombre entier dans le conteneur _store. Si la taille
+ * du conteneur atteint ou depasse la taille maximale (_sizelist), une exception
+ * ExcepSize est lancee. Si DEBUG est vrai, un message de confirmation est affiche.
+ *
+ * @param val Le nombre entier a ajouter dans _store.
+ * @throws ExcepSize Si la taille du conteneur _store atteint ou depasse
+ * la taille maximale.
+ */
+void Span::addNumber(int val)
+{
+	if (this->_store.size() >= this->_sizelist)
+		throw ExcepSize();
+
+	this->_store.push_back(val);
+
+	if (DEBUG == true)
+		std::cout << GREEN << LOGO << RESET << "Add number." << RESET << std::endl;
+}
+
+/**
+ * @brief Calcule le plus petit ecart entre deux elements dans _store.
+ *
+ * Cette methode trie le conteneur _store, puis calcule la plus petite
+ * difference entre des elements adjacents dans le conteneur. Si le
+ * conteneur contient moins de deux elements, une exception ExcepDist
+ * est lancee.
+ *
+ * @return Le plus petit ecart entre deux elements dans _store.
+ * @throws ExcepDist Si le conteneur _store contient moins de deux elements.
+ */
+int Span::shortestSpan()
+{
+	if (this->_store.size() < 2)
+		throw ExcepDist();
+
+	std::sort(this->_store.begin(), this->_store.end());
+	
+	int min = this->_store[1] - this->_store[0];
+	for (size_t i = 1; i < this->_store.size() - 1; i++)
+	{
+		int diff = this->_store[i + 1] - this->_store[i];
+		min = std::min(min, diff);
+	}
+
+	return min;
+}
+
+/**
+ * @brief Calcule le plus grand ecart entre deux elements dans _store.
+ *
+ * Cette methode parcourt le conteneur _store pour trouver les valeurs
+ * minimales et maximales, puis retourne la difference entre ces deux
+ * valeurs. Si le conteneur contient moins de deux elements, une exception
+ * ExcepDist est lancee.
+ *
+ * @return L'ecart entre les valeurs maximale et minimale dans _store.
+ * @throws ExcepDist Si le conteneur _store contient moins de deux elements.
+ */
+int Span::longestSpan()
+{
+	if (this->_store.size() < 2)
+		throw ExcepDist();
+
+	int min = this->_store[0];
+	int max = this->_store[0];
+
+	for (size_t i = 0; i < this->_store.size(); ++i) {
+		if (max < this->_store[i])
+			max = this->_store[i];
+
+		if (min > this->_store[i])
+			min = this->_store[i];
+	}
+
+	return (max - min);
+}
+
+/**
+ * @brief Ajoute des nombres aleatoires dans le conteneur _store.
+ *
+ * Cette methode genere une serie de nombres aleatoires en utilisant la
+ * fonction std::rand(), puis les ajoute au conteneur _store en appelant
+ * la methode addNumber(). Le nombre de valeurs ajoutees est specifie par
+ * le parametre qNb. Avant l'ajout, un message de lancement peut etre
+ * affiche si DEBUG est vrai.
+ *
+ * @param qNb Le nombre de nombres aleatoires a ajouter.
+ */
+void Span::addRandNumber(int qNb)
+{
+	if (DEBUG == true)
+		std::cout << GREEN << LOGO << CYAN << "Launch rand number." << RESET << std::endl;
+
+	std::srand(static_cast<unsigned int>(time(NULL)));
+
+	for (int i = 0; i < qNb; i++)
+	{
+		int rNum = std::rand() - RAND_MAX / 2;
+		this->addNumber(rNum);
+	}
+}
+
+/**
+ * @brief Affiche les elements stockes dans le conteneur _store.
+ *
+ * Cette methode parcourt le conteneur _store et affiche chaque element avec
+ * son index, en utilisant des couleurs pour mieux visualiser l'information.
+ * Les index sont affiches en jaune, et les valeurs stockees en cyan.
+ */
+void Span::storePrint()
+{
+	for (size_t i = 0; i < this->_store.size(); i++)
+	{
+		std::cout << " store id [" << YELLOW << i << RESET << "] = " << CYAN << this->_store[i] << RESET << std::endl;
+	}
+}
+
+//==============================
+// Exception
+//==============================
+
+/**
+ * @brief Retourne le message d'erreur pour l'exception ExcepSize.
+ *
+ * Cette methode est surchargee depuis std::exception et indique que la taille
+ * maximale a ete atteinte lors d'une operation qui depasse la capacite
+ * autorisee.
+ *
+ * @return Un pointeur vers une chaine de caractere contenant le message
+ *         d'erreur.
+ */
+const char* ExcepSize::what() const throw()
+{
+	if (std::string(LANG) == "FR")
+		return (YELLOW LOGOEXCE RED "Taille maximale atteinte." RESET);
+	else
+		return (YELLOW LOGOEXCE RED "Maximum size reached." RESET);
+}
+
+/**
+ * @brief Retourne le message d'erreur pour l'exception ExcepDist.
+ *
+ * Cette methode est surchargee depuis std::exception et indique que la taille
+ * du vecteur est inferieure a 2, ce qui n'est pas valide pour certaines operations.
+ *
+ * @return Un pointeur vers une chaine de caractere contenant le message
+ *         d'erreur.
+ */
+const char* ExcepDist::what() const throw()
+{
+
+	if (std::string(LANG) == "FR")
+		return (YELLOW LOGOEXCE RED "Taille du vecteur inferieure à 2." RESET);
+	else
+		return (YELLOW LOGOEXCE RED "Vector size less than 2." RESET);
+}

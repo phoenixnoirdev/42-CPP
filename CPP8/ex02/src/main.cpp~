@@ -1,0 +1,165 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: phkevin <phkevin@42luxembourg.lu>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/07 13:32:25 by phkevin           #+#    #+#             */
+/*   Updated: 2025/07/07 13:32:25 by phkevin          ###   Luxembourg.lu     */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "inc/MutantStack.hpp"
+#include <list>
+
+/**
+ * @brief Affiche plusieurs lignes vides dans la console.
+ *
+ * @param nb Nombre de lignes vides a afficher.
+ */
+void lBreak(int nb)
+{
+    for (int i = 0; i < nb; ++i)
+        std::cout << std::endl;
+}
+
+/**
+ * @brief Affiche un separateur formate avec un titre centr�.
+ *
+ * @param str Texte a afficher au centre du separateur.
+ */
+void separator(std::string str)
+{
+    lBreak(2);
+    std::cout << YELLOW << "------------------------------------" << RESET << std::endl;
+    std::cout << YELLOW << str << RESET << std::endl;
+    std::cout << YELLOW << "------------------------------------" << RESET << std::endl;
+    lBreak(2);
+}
+
+
+int main()
+{
+    //==============================
+    // MAIN 42
+    //==============================
+    separator("Main 42");
+
+    /*
+    MutantStack<int>    mstack;
+
+    mstack.push(5);
+    mstack.push(17);
+    std::cout << mstack.top() << std::endl;
+
+    mstack.pop();
+    std::cout << mstack.size() << std::endl;
+
+    mstack.push(3);
+    mstack.push(5);
+    mstack.push(737);
+    mstack.push(0);
+
+    MutantStack<int>::iterator it = mstack.begin();
+    MutantStack<int>::iterator ite = mstack.end();
+    ++it;
+    --it;
+    while (it != ite)
+    {
+        std::cout << *it << std::endl;
+        ++it;
+    }
+    std::stack<int> s(mstack);
+    */
+
+
+
+	if (std::string(LANG) == "FR")
+		std::cout << CYAN << "✅ nous créons un objet MutantStack." << RESET << std::endl;
+	else
+		std::cout << CYAN << "✅ we create a MutantStack object." <<  RESET << std::endl;
+
+	MutantStack<int>			mstack;
+	mstack.push(100);
+	mstack.push(200);
+	mstack.push(300);
+	mstack.push(400);
+	mstack.push(500);
+	mstack.push(600);
+	mstack.push(700);
+	mstack.push(800);
+	mstack.push(900);
+	mstack.push(1000);
+
+
+
+
+	if (std::string(LANG) == "FR")
+		std::cout << CYAN << "🔄 nous imprimons tous les elements de mstack." << RESET << std::endl;
+	else
+		std::cout << CYAN << "🔄 we print all value of mstack." <<  RESET << std::endl;
+
+	for (MutantStack<int>::iterator it = mstack.begin(); it != mstack.end(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+
+
+	if (std::string(LANG) == "FR")
+		std::cout << CYAN << "\n✅ Test avec `MutantStack<int, std::list<int>>`" <<  RESET << std::endl;
+	else
+		std::cout << CYAN << "\n✅ Test with `MutantStack<int, std::list<int>>`" <<  RESET << std::endl;
+
+	MutantStack< int, std::list<int> >	listStack;
+	listStack.push(100);
+	listStack.push(200);
+	listStack.push(300);
+	listStack.push(400);
+	listStack.push(500);
+	listStack.push(600);
+	listStack.push(700);
+	listStack.push(800);
+	listStack.push(900);
+	listStack.push(1000);
+
+
+	if (std::string(LANG) == "FR")
+		std::cout << CYAN << "🔄 nous imprimons tous les elements avec `list<int>`:" << RESET << std::endl;
+	else
+		std::cout << CYAN << "🔄 we print all element with `list<int>`:" <<  RESET << std::endl;
+
+	for (MutantStack< int, std::list<int> >::iterator it = listStack.begin(); it != listStack.end(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+
+
+	if (std::string(LANG) == "FR")
+		std::cout << CYAN << "\n✅ Test avec `MutantStack<int, std::deque<int>>`" << RESET << std::endl;
+	else
+		std::cout << CYAN << "\n✅ Test with `MutantStack<int, std::deque<int>>`" <<  RESET << std::endl;
+
+	MutantStack< int, std::deque<int> >	dequeStack;
+	dequeStack.push(100);
+	dequeStack.push(200);
+	dequeStack.push(300);
+	dequeStack.push(400);
+	dequeStack.push(500);
+	dequeStack.push(600);
+	dequeStack.push(700);
+	dequeStack.push(800);
+	dequeStack.push(900);
+	dequeStack.push(1000);
+
+
+	if (std::string(LANG) == "FR")
+	std::cout << CYAN << "🔄 nous imprimons tous les elements avec `deque<int>`:" << RESET << std::endl;
+	else
+		std::cout << CYAN << "🔄 we print all element with `deque<int>`:" <<  RESET << std::endl;
+
+	for (MutantStack< int, std::deque<int> >::iterator it = dequeStack.begin(); it != dequeStack.end(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+
+
+    return 0;
+}
